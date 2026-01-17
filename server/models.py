@@ -1,14 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
-# contains definitions of tables and associated schema constructs
-metadata = MetaData()
+# Define naming convention for constraints
+metadata = MetaData(naming_convention={
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+})
 
-# create the Flask SQLAlchemy extension
+# Initialize SQLAlchemy with custom metadata
 db = SQLAlchemy(metadata=metadata)
-
-# define a model class by inheriting from db.Model.
-
 
 class Pet(db.Model):
     __tablename__ = 'pets'
